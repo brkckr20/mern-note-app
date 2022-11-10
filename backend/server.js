@@ -12,7 +12,7 @@ app.use((req, res, next) => {
 })
 app.use(express.json());
 
-app.use("/", notRoute);
+app.use("/api/notlar", notRoute);
 
 
 const PORT = process.env.PORT || 4000;
