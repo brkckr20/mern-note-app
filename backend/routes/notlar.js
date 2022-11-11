@@ -1,36 +1,16 @@
 const express = require("express");
+const { notOlustur, notlariGetir, notGetir, notSil, notGuncelle } = require("../controller/notController")
 
 const router = express.Router();
-//getir
-router.get("/", (req, res) => {
-    res.json({ message: "Tüm Notlar" })
-});
-//getir
-router.get("/:id", (req, res) => {
-    const { id } = req.params;
-    res.json({
-        message: `${id} li not`
-    })
-});
+//tümünü listele
+router.get("/", notlariGetir);
+//tekil listeleme
+router.get("/:id", notGetir);
 //kaydet
-router.post("/", (req, res) => {
-    res.json({
-        message: "Yeni not ekle"
-    })
-})
+router.post("/", notOlustur)
 //silme
-router.delete("/:id", (req, res) => {
-    const { id } = req.params;
-    res.json({
-        message: `${id} li notu sil`
-    })
-})
-
+router.delete("/:id", notSil)
 //güncelleme
-router.patch("/:id", (req, res) => {
-    res.json({
-        message: `${req.body.ad} güncelle`
-    })
-})
+router.patch("/:id", notGuncelle)
 
 module.exports = router;
