@@ -15,8 +15,9 @@ const notOlustur = async (req, res) => {
 
 const notlariGetir = async (req, res) => {
     try {
-        const notlar = await NotModel.find().sort({ createdAt: -1 });
-        res.status(200).json(notlar);
+        const notlar = await NotModel.find()//.sort({ createdAt: -1 });
+        //res.status(200).json(notlar);
+        res.send(notlar)
     } catch (error) {
         res.status(400).json({ err: error.message })
     }
@@ -68,7 +69,7 @@ const notGuncelle = async (req, res) => {
     try {
         const not = await NotModel.findOneAndUpdate({ _id: id }, {
             ...req.body
-        }, { new: true });
+        }, { new: true }); // güncellenmiş veriyi göndermek
         if (!not) {
             return res.status(404).json({ err: "Not güncelleme işlemi başarısız!" })
         }

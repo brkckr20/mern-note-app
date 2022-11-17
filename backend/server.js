@@ -1,7 +1,10 @@
 const express = require("express");
+var cors = require('cors')
 const app = express();
 require("dotenv").config();
 const mongoose = require("mongoose");
+
+app.use(cors())
 
 const notRoute = require("./routes/notlar")
 
