@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import NoteCard from '../components/NoteCard';
+import NotForm from '../components/NotForm';
 const Home = () => {
 
     const [notlar, setNotlar] = useState([]);
@@ -6,7 +8,7 @@ const Home = () => {
     useEffect(() => {
         const fetchNotlar = async () => {
             const res = await fetch("http://localhost:4500/api/notlar");
-            const json = res.json();
+            const json = await res.json();
 
             if (res.ok) {
                 setNotlar(json)
@@ -14,14 +16,17 @@ const Home = () => {
         }
 
         fetchNotlar();
-    }, [])
+    }, [notlar])
 
     return (
-        <div className='max-w-7xl mx-auto pt-3'>
-            <div>
-                {notlar.map(not => {
-                    <p key={not._id}>{not.baslik}</p>
-                })}
+        <div className='max-w-7xl mx-auto pt-5'>
+            <NotForm />
+            <div className='grid grid-cols-3 gap-3 mx-2'>
+                {
+                    notlar.map(n => (
+                        <NoteCard nots={n} key={n._id} />
+                    ))
+                }
             </div>
         </div>
     )

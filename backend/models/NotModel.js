@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const notSchema = new Schema({
     baslik: {
         type: String,
-        required: true,
+        required: [true, "Başlık zorunlu alan..."],
     },
     aciklama: {
         type: String
